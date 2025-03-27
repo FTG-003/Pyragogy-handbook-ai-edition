@@ -1,0 +1,156 @@
+{
+  "name": "Peeragogy QA Flow",
+  "description": "Retrieval-based flow to test the Co-Creation with AI chapter from the Peeragogy Handbook.",
+  "template": "56fcd106-fb8b-4191-9c72-7050bb594ab6",
+  "flowVersion": "1.0.0",
+  "createdDate": "2025-03-27T12:45:27.813520Z",
+  "updatedDate": "2025-03-27T12:45:27.813520Z",
+  "data": {
+    "nodes": [
+      {
+        "id": "1",
+        "type": "CustomDocumentLoader",
+        "data": {
+          "name": "Load Chapter",
+          "loader_type": "TextFileLoader",
+          "file_paths": [
+            "/app/data/chapter4-full-co-creation-with-ai.md"
+          ]
+        },
+        "position": {
+          "x": 50,
+          "y": 100
+        }
+      },
+      {
+        "id": "2",
+        "type": "MarkdownTextSplitter",
+        "data": {
+          "chunkSize": 500,
+          "chunkOverlap": 50,
+          "splitter_type": "markdown"
+        },
+        "position": {
+          "x": 300,
+          "y": 100
+        }
+      },
+      {
+        "id": "3",
+        "type": "OpenAIEmbeddings",
+        "data": {
+          "model": "text-embedding-ada-002",
+          "apiKey": "{{OPENAI_API_KEY}}"
+        },
+        "position": {
+          "x": 550,
+          "y": 100
+        }
+      },
+      {
+        "id": "4",
+        "type": "Chroma",
+        "data": {
+          "vectorStore": "chroma",
+          "persistDirectory": "/app/data/chroma"
+        },
+        "position": {
+          "x": 800,
+          "y": 100
+        }
+      },
+      {
+        "id": "5",
+        "type": "Retriever",
+        "data": {
+          "k": 4
+        },
+        "position": {
+          "x": 1050,
+          "y": 100
+        }
+      },
+      {
+        "id": "6",
+        "type": "ChatOpenAI",
+        "data": {
+          "model": "gpt-4",
+          "temperature": 0.3
+        },
+        "position": {
+          "x": 800,
+          "y": 300
+        }
+      },
+      {
+        "id": "7",
+        "type": "ConversationalRetrievalQAChain",
+        "data": {
+          "returnSourceDocuments": true
+        },
+        "position": {
+          "x": 1100,
+          "y": 250
+        }
+      },
+      {
+        "id": "8",
+        "type": "UserInput",
+        "data": {
+          "text": ""
+        },
+        "position": {
+          "x": 900,
+          "y": 400
+        }
+      }
+    ],
+    "edges": [
+      {
+        "source": "1",
+        "target": "2",
+        "id": "e1-2"
+      },
+      {
+        "source": "2",
+        "target": "3",
+        "id": "e2-3"
+      },
+      {
+        "source": "2",
+        "target": "4",
+        "id": "e2-4"
+      },
+      {
+        "source": "3",
+        "target": "4",
+        "id": "e3-4"
+      },
+      {
+        "source": "4",
+        "target": "5",
+        "id": "e4-5"
+      },
+      {
+        "source": "5",
+        "target": "7",
+        "id": "e5-7"
+      },
+      {
+        "source": "6",
+        "target": "7",
+        "id": "e6-7"
+      },
+      {
+        "source": "8",
+        "target": "7",
+        "id": "e8-7"
+      }
+    ],
+    "viewport": {
+      "x": 0,
+      "y": 0,
+      "zoom": 1
+    }
+  }
+}

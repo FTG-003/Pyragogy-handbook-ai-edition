@@ -14,13 +14,11 @@ It uses simple tools (Flowise, Replit, ChromaDB, GitHub Pages) to allow:
 
 ## 📁 Structure
 
-```
-/replit/          → AI simulation backend (mock or real)
-/flowise/         → JSON Flowise agents
-/ai-handbook/     → Markdown modules of the handbook
-/public-viewer/   → Static viewer (HTML)
-/docs/            → Documentation
-```
+/replit/ → AI simulation backend (mock or real) /flowise/ → JSON Flowise agents /ai-handbook/ → Markdown modules of the handbook /public-viewer/ → Static viewer (HTML) /docs/ → Documentation
+
+markdown
+Copia
+Modifica
 
 ## 🎯 First Goal (48h Cycle)
 
@@ -33,3 +31,6 @@ It uses simple tools (Flowise, Replit, ChromaDB, GitHub Pages) to allow:
 
 - **Fabrizio Terzi** (FTG-003) – [https://ftg-003.github.io/siar/](https://ftg-003.github.io/siar/)
 - Powered by AI Peeragogy Agent “Gino”
+
+---
+
