@@ -1,5 +1,5 @@
 {
-  "name": "PeerGang QA v0.1",
+  "name": "PeerGang QA v0.1 - GitHub Markdown",
   "nodes": [
     {
       "parameters": {},
@@ -14,12 +14,13 @@
     },
     {
       "parameters": {
-        "filePath": "/data/input/peeragogy_test.md",
-        "options": {}
+        "requestMethod": "GET",
+        "url": "https://raw.githubusercontent.com/FTG-003/Pyragogy-handbook-ai-edition/main/flowise/chapters/chapter4-full-co-creation-with-ai.md",
+        "responseFormat": "string"
       },
-      "id": "readFile",
-      "name": "Read Markdown File",
-      "type": "n8n-nodes-base.readBinaryFile",
+      "id": "httpRequestFile",
+      "name": "Download Markdown from GitHub",
+      "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 1,
       "position": [
         450,
@@ -28,7 +29,7 @@
     },
     {
       "parameters": {
-        "functionCode": "const text = Buffer.from(items[0].binary.data.data, 'base64').toString();\nconst chunkSize = 500;\nlet chunks = [];\n\nfor (let i = 0; i < text.length; i += chunkSize) {\n    const chunk = text.slice(i, i + chunkSize);\n    chunks.push({ json: { chunk } });\n}\n\nreturn chunks;"
+        "functionCode": "const text = items[0].json.body;\nconst chunkSize = 500;\nlet chunks = [];\n\nfor (let i = 0; i < text.length; i += chunkSize) {\n    const chunk = text.slice(i, i + chunkSize);\n    chunks.push({ json: { chunk } });\n}\n\nreturn chunks;"
       },
       "id": "splitText",
       "name": "Split Text into Chunks",
@@ -60,7 +61,7 @@
       "credentials": {
         "httpHeaderAuth": {
           "id": "openai-credential",
-          "name": "OpenAI API"
+          "name": "openai-credential"
         }
       }
     },
@@ -83,14 +84,14 @@
       "main": [
         [
           {
-            "node": "Read Markdown File",
+            "node": "Download Markdown from GitHub",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Read Markdown File": {
+    "Download Markdown from GitHub": {
       "main": [
         [
           {
