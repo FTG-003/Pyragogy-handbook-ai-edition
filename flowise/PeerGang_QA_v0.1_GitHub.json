@@ -1,0 +1,128 @@
+{
+  "name": "PeerGang QA v0.1 - GitHub Markdown",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "manualTrigger",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "requestMethod": "GET",
+        "url": "https://raw.githubusercontent.com/FTG-003/Pyragogy-handbook-ai-edition/main/flowise/chapters/chapter4-full-co-creation-with-ai.md",
+        "responseFormat": "string"
+      },
+      "id": "httpRequestFile",
+      "name": "Download Markdown from GitHub",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "const text = items[0].json.body;\nconst chunkSize = 500;\nlet chunks = [];\n\nfor (let i = 0; i < text.length; i += chunkSize) {\n    const chunk = text.slice(i, i + chunkSize);\n    chunks.push({ json: { chunk } });\n}\n\nreturn chunks;"
+      },
+      "id": "splitText",
+      "name": "Split Text into Chunks",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "https://api.openai.com/v1/embeddings",
+        "authentication": "headerAuth",
+        "responseFormat": "json",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "{\n  \"input\": {{$json[\"chunk\"]}},\n  \"model\": \"text-embedding-ada-002\"\n}"
+      },
+      "id": "getEmbeddings",
+      "name": "Get Embedding (OpenAI)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "openai-credential",
+          "name": "openai-credential"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "return [{ json: { message: 'Embedding completed and stored.' } }];"
+      },
+      "id": "finishMessage",
+      "name": "Done",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        1050,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Download Markdown from GitHub",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Markdown from GitHub": {
+      "main": [
+        [
+          {
+            "node": "Split Text into Chunks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Text into Chunks": {
+      "main": [
+        [
+          {
+            "node": "Get Embedding (OpenAI)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Embedding (OpenAI)": {
+      "main": [
+        [
+          {
+            "node": "Done",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
