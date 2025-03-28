@@ -2,5 +2,39 @@ title: Peeragogy Handbook AI Edition
 description: An AI-enhanced version of the Peeragogy Handbook
 baseurl: "/peeragogy-ai-handbook"
 url: "https://ftg-003.github.io"
+
+# Build settings
 markdown: kramdown
 theme: minima
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Collections
+collections:
+  chapters:
+    output: true
+    permalink: /chapters/:path/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "chapters"
+    values:
+      layout: "chapter"
+      ai_processable: true
+
+# AI Integration Settings
+ai_settings:
+  chunk_size: 1000
+  embedding_model: "text-embedding-ada-002"
+  include_metadata: true
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .git
