@@ -1,9 +1,0 @@
-
-<nav class="site-nav">
-  {% for item in site.data.navigation[page.lang] %}
-    <a href="{{ item.link | relative_url }}" {% if page.url == item.link %}class="active"{% endif %}>
-      {{ item.name }}
-    </a>
-  {% endfor %}
-  {% include language-selector.html %}
-</nav>
