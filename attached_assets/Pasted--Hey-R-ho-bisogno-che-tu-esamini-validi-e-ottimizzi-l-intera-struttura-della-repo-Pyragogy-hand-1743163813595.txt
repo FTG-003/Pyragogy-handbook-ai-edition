@@ -1,0 +1,51 @@
+👋 Hey R, ho bisogno che tu esamini, validi e ottimizzi l’intera struttura della repo `Pyragogy-handbook-ai-edition`, partendo dalla directory `/docs` attualmente configurata per Jekyll + GitHub Pages.
+
+### ✅ Obiettivi del task:
+1. **Analizza e verifica** la struttura attuale della cartella `/docs`, inclusi:
+   - `_config.yml`
+   - `index.md` o `index.html`
+   - cartelle `assets`, `layouts`, `includes`, `pages`, `chapters`, ecc.
+   - compatibilità con il motore Jekyll
+
+2. **Verifica coerenza e integrità**:
+   - I permalink dei file funzionano?
+   - I file `.md` sono nei posti giusti?
+   - I layout sono ben collegati?
+   - La home page si apre correttamente?
+   - Mancano file critici (es. `404.html`, `sitemap.xml`, ecc.)?
+
+3. **Convalida i contenuti importati** da peeragogy.org:
+   - Sono organizzati logicamente?
+   - I riferimenti nei link sono corretti?
+   - I capitoli sono accessibili e ben formattati?
+   - Il menu di navigazione è presente o da generare?
+
+4. **Suggerisci miglioramenti**, se necessario, per:
+   - Ottimizzare struttura Jekyll
+   - Rendere il sito più performante e scalabile
+   - Rendere tutto più chiaro per l’integrazione futura di AI
+
+5. **Segnala problemi tecnici bloccanti**, come:
+   - Path errati
+   - File duplicati o non utilizzati
+   - Errori nei file `.html` / `.md`
+   - Asset rotti
+
+---
+
+### 🔧 Context extra:
+- Il sito verrà pubblicato con GitHub Pages.
+- Ogni modifica sarà anche elaborata da AI (Flowise/n8n) per embedding e generazione assistita.
+- Il contenuto deve restare fedele all'ordine e struttura di [peeragogy.org](https://peeragogy.org).
+- I file Markdown saranno usati da un bot AI per creare chatbot conversazionali (con chunking, semantic search, QA chain).
+
+---
+
+### 🧠 Ti invito a:
+- Fare un’analisi intelligente (non solo tecnica).
+- Commentare le parti migliorabili.
+- Proporre modifiche strutturali per rendere tutto più mantenibile, leggibile e AI-compatible.
+
+💬 Se vuoi, puoi anche autogenerare un file `VALIDATION_REPORT.md` dentro `/docs` con tutti i tuoi risultati.
+
+Grazie R, contiamo su di te.
