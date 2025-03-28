@@ -3,7 +3,20 @@ run = "uvicorn undefined:app --host 0.0.0.0 --port 3000"
 modules = ["python-3.12", "web"]
 
 [deployment]
-run = ["sh", "-c", "uvicorn undefined:app --host 0.0.0.0 --port 3000"]
+run = ["sh", "-c", "bundle exec jekyll serve --port 5000"]
+build = ["sh", "-c", "cd docs && bundle exec jekyll build"]
 
 [nix]
 channel = "stable-24_05"
+
+[workflows]
+runButton = "Jekyll Build"
+
+[[workflows.workflow]]
+name = "Jekyll Build"
+author = 40781271
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd docs && bundle exec jekyll serve --host 0.0.0.0 --port 5000"

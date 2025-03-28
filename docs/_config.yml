@@ -1,7 +1,14 @@
+
 title: Peeragogy Handbook AI Edition
 description: An AI-enhanced version of the Peeragogy Handbook
 baseurl: "/peeragogy-ai-handbook"
 url: "https://ftg-003.github.io"
+
+# Multilingual settings
+languages: ["en", "it"]
+default_lang: "en"
+exclude_from_localization: ["assets", "css", "js", "images"]
+parallel_localization: true
 
 # Build settings
 markdown: kramdown
@@ -14,9 +21,8 @@ plugins:
 collections:
   chapters:
     output: true
-    permalink: /chapters/:path/
+    permalink: /:collection/:path/
 
-# Defaults
 defaults:
   - scope:
       path: ""
@@ -24,12 +30,16 @@ defaults:
     values:
       layout: "chapter"
       ai_processable: true
-
-# AI Integration Settings
-ai_settings:
-  chunk_size: 1000
-  embedding_model: "text-embedding-ada-002"
-  include_metadata: true
+      
+  - scope:
+      path: "_chapters/en"
+    values:
+      lang: "en"
+      
+  - scope:
+      path: "_chapters/it"
+    values:
+      lang: "it"
 
 # Exclude from processing
 exclude:
