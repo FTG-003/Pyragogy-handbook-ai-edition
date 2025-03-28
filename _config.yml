@@ -1,0 +1,19 @@
+title: "Peeragogy Handbook AI Edition"
+baseurl: "" 
+url: "https://ftg-003.github.io/Pyragogy-handbook-ai-edition"
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+collections:
+  chapters:
+    output: true
+    permalink: /chapters/:lang/:name/
+defaults:
+  - scope:
+      path: "_chapters/en-md"
+    values:
+      layout: default
+      lang: en
+      format: md
+
