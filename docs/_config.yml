@@ -1,0 +1,6 @@
+title: Peeragogy Handbook AI Edition
+description: An AI-enhanced version of the Peeragogy Handbook
+baseurl: "/peeragogy-ai-handbook"
+url: "https://ftg-003.github.io"
+markdown: kramdown
+theme: minima
